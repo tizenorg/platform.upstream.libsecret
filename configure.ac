@@ -66,8 +66,6 @@ PKG_CHECK_MODULES(GLIB,
 LIBS="$LIBS $GLIB_LIBS"
 CFLAGS="$CFLAGS $GLIB_CFLAGS"
 
-GTK_DOC_CHECK(1.9)
-
 GOBJECT_INTROSPECTION_CHECK([1.29])
 AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 
@@ -259,12 +257,6 @@ AC_SUBST(SECRET_MINOR)
 AC_CONFIG_FILES([
 	Makefile
 	build/Makefile
-	docs/Makefile
-	docs/man/Makefile
-	docs/reference/Makefile
-	docs/reference/libsecret/Makefile
-	docs/reference/libsecret/version.xml
-	docs/reference/libsecret/version-major.xml
 	egg/Makefile
 	egg/tests/Makefile
 	po/Makefile.in

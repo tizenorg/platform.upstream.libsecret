@@ -3,14 +3,13 @@ include $(top_srcdir)/Makefile.decl
 
 ACLOCAL_AMFLAGS = -I build/m4 ${ACLOCAL_FLAGS}
 
-SUBDIRS = build egg libsecret tool po docs .
+SUBDIRS = build egg libsecret tool po .
 
 DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-debug=yes \
 	--disable-coverage \
 	--enable-strict \
 	--disable-silent-rules \
-	--enable-gtk-doc \
 	--enable-vala
 
 EXTRA_DIST = \
