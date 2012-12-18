@@ -5,15 +5,13 @@ ACLOCAL_AMFLAGS = -I build/m4 ${ACLOCAL_FLAGS}
 
 SUBDIRS = \
 	. \
-	po \
-	docs/reference/libsecret
+	po
 
 DISTCHECK_CONFIGURE_FLAGS = \
 	--enable-debug=yes \
 	--disable-coverage \
 	--disable-strict \
 	--disable-silent-rules \
-	--enable-gtk-doc \
 	--enable-vala
 
 dist-hook:

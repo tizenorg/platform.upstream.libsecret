@@ -74,6 +74,7 @@ secrets. It communicates with the "Secret Service" using DBus.
 %setup -q
 
 %build
+%autogen
 %configure \
         --disable-static
 make V=1
@@ -104,7 +105,6 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 %files tools
 %defattr(-,root,root)
 %{_bindir}/secret-tool
-%{_mandir}/man1/secret-tool.1%{?ext_man}
 
 %files devel
 %defattr (-, root, root)
@@ -114,7 +114,6 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 %{_includedir}/libsecret-1/
 %{_datadir}/gir-1.0/Secret-1.gir
 %{_datadir}/gir-1.0/SecretUnstable-0.gir
-%doc %{_datadir}/gtk-doc/html/libsecret-1/
 %dir %{_datadir}/vala/vapi
 %{_datadir}/vala/vapi/libsecret-1.deps
 %{_datadir}/vala/vapi/libsecret-1.vapi
