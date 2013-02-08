@@ -1,18 +1,18 @@
 %define have_lang 1
 
 Name:           libsecret
-Version:        0.12
+Version:        0.13
 Release:        0
 Summary:        Library for accessing the Secret Service API
 License:        LGPL-2.1+
 Group:          System/Libraries
 Url:            http://www.gnome.org/
-Source0:        http://download.gnome.org/sources/libsecret/0.10/%{name}-%{version}.tar.xz
+Source0:        http://download.gnome.org/sources/libsecret/0.13/%{name}-%{version}.tar.xz
 Source99:       baselibs.conf
-BuildRequires:  gettext-tools
 BuildRequires:  docbook-xsl-stylesheets
 BuildRequires:  fdupes
-BuildRequires:  gobject-introspection-devel >= 1.29
+BuildRequires:  gettext-tools
+BuildRequires:  gtk-doc
 BuildRequires:  intltool
 BuildRequires:  libgcrypt-devel >= 1.2.2
 BuildRequires:  vala >= 0.17.2.12
@@ -20,15 +20,12 @@ BuildRequires:  xsltproc
 BuildRequires:  pkgconfig(gio-2.0) >= 2.31.0
 BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(glib-2.0) >= 2.31.0
-BuildRoot:      %{_tmppath}/%{name}-%{version}-build
+BuildRequires:  pkgconfig(gobject-introspection-1.0) >= 1.29
+Recommends:     %{name}-lang
 
 %description
 libsecret is a library for storing and retrieving passwords and other
 secrets. It communicates with the "Secret Service" using DBus.
-
-Summary:        Library for accessing the Secret Service API
-Group:          System/Libraries
-Recommends:     %{name}-lang
 
 %package -n typelib-Secret
 Summary:        Library for accessing the Secret Service API -- Introspection bindings
@@ -60,7 +57,7 @@ secrets. It communicates with the "Secret Service" using DBus.
 
 %package devel
 Summary:        Library for accessing the Secret Service API -- Development Files
-Group:          Development/Libraries/GNOME
+Group:          Development/Libraries
 Requires:       libsecret = %{version}
 Requires:       typelib-Secret = %{version}
 Requires:       typelib-SecretUnstable = %{version}
@@ -74,8 +71,7 @@ secrets. It communicates with the "Secret Service" using DBus.
 %setup -q
 
 %build
-%autogen
-%configure \
+%autogen \
         --disable-static
 make V=1
 
@@ -91,7 +87,7 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 
 %files 
 %defattr (-, root, root)
-%doc AUTHORS ChangeLog COPYING NEWS README
+%license COPYING
 %{_libdir}/libsecret-1.so.*
 
 %files -n typelib-Secret
@@ -108,6 +104,7 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 
 %files devel
 %defattr (-, root, root)
+%doc AUTHORS ChangeLog NEWS README
 %{_libdir}/libsecret-1.so
 %{_libdir}/pkgconfig/libsecret-1.pc
 %{_libdir}/pkgconfig/libsecret-unstable.pc
@@ -120,3 +117,4 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 %{_datadir}/vala/vapi/libsecret-unstable.deps
 %{_datadir}/vala/vapi/libsecret-unstable.vapi
 %{_datadir}/vala/vapi/mock-service-0.vapi
+
