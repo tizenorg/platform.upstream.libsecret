@@ -1,4 +1,5 @@
 %define have_lang 1
+%define baseline 0.15
 
 Name:           libsecret
 Version:        0.15
@@ -7,7 +8,8 @@ Summary:        Library for accessing the Secret Service API
 License:        LGPL-2.1+
 Group:          System/Libraries
 Url:            http://www.gnome.org/
-Source0:        http://download.gnome.org/sources/libsecret/0.13/%{name}-%{version}.tar.xz
+#X-Vc-Url:      git://git.gnome.org/libsecret
+Source0:        http://download.gnome.org/sources/libsecret/%{baseline}/%{name}-%{version}.tar.xz
 Source99:       baselibs.conf
 BuildRequires:  docbook-xsl-stylesheets
 BuildRequires:  fdupes
@@ -21,7 +23,7 @@ BuildRequires:  pkgconfig(gio-2.0) >= 2.31.0
 BuildRequires:  pkgconfig(gio-unix-2.0)
 BuildRequires:  pkgconfig(glib-2.0) >= 2.31.0
 BuildRequires:  pkgconfig(gobject-introspection-1.0) >= 1.29
-Recommends:     %{name}-lang
+Recommends:     %{name}-lang = %{version}-%{release}
 
 %description
 libsecret is a library for storing and retrieving passwords and other
@@ -58,9 +60,9 @@ secrets. It communicates with the "Secret Service" using DBus.
 %package devel
 Summary:        Library for accessing the Secret Service API -- Development Files
 Group:          Development/Libraries
-Requires:       libsecret = %{version}
-Requires:       typelib-Secret = %{version}
-Requires:       typelib-SecretUnstable = %{version}
+Requires:       libsecret = %{version}-%{release}
+Requires:       typelib-Secret = %{version}-%{release}
+Requires:       typelib-SecretUnstable = %{version}-%{release}
 
 %description devel
 libsecret is a library for storing and retrieving passwords and other
@@ -72,8 +74,9 @@ secrets. It communicates with the "Secret Service" using DBus.
 
 %build
 %autogen \
-        --disable-static
-make V=1
+       --disable-static
+
+%__make  %{?_smp_mflags}
 
 %install
 %make_install
