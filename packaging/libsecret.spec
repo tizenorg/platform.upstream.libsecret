@@ -1,8 +1,8 @@
 %define have_lang 1
-%define baseline 0.15
+%define baseline 0.18
 
 Name:           libsecret
-Version:        0.15
+Version:        0.18
 Release:        0
 Summary:        Library for accessing the Secret Service API
 License:        LGPL-2.1+
@@ -34,16 +34,6 @@ Summary:        Library for accessing the Secret Service API -- Introspection bi
 Group:          System/Libraries
 
 %description -n typelib-Secret
-libsecret is a library for storing and retrieving passwords and other
-secrets. It communicates with the "Secret Service" using DBus.
-
-This package provides the GObject Introspection bindings for libsecret.
-
-%package -n typelib-SecretUnstable
-Summary:        Library for accessing the Secret Service API -- Introspection bindings
-Group:          System/Libraries
-
-%description -n typelib-SecretUnstable
 libsecret is a library for storing and retrieving passwords and other
 secrets. It communicates with the "Secret Service" using DBus.
 
@@ -88,6 +78,8 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 
 %postun -p /sbin/ldconfig
 
+%docs_package
+
 %files 
 %defattr (-, root, root)
 %license COPYING
@@ -96,10 +88,6 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 %files -n typelib-Secret
 %defattr(-,root,root)
 %{_libdir}/girepository-1.0/Secret-1.typelib
-
-%files -n typelib-SecretUnstable
-%defattr(-,root,root)
-%{_libdir}/girepository-1.0/SecretUnstable-0.typelib
 
 %files tools
 %defattr(-,root,root)
@@ -113,11 +101,5 @@ rm -rf %{buildroot}%{_datadir}/locales/*
 %{_libdir}/pkgconfig/libsecret-unstable.pc
 %{_includedir}/libsecret-1/
 %{_datadir}/gir-1.0/Secret-1.gir
-%{_datadir}/gir-1.0/SecretUnstable-0.gir
-%dir %{_datadir}/vala/vapi
 %{_datadir}/vala/vapi/libsecret-1.deps
 %{_datadir}/vala/vapi/libsecret-1.vapi
-%{_datadir}/vala/vapi/libsecret-unstable.deps
-%{_datadir}/vala/vapi/libsecret-unstable.vapi
-%{_datadir}/vala/vapi/mock-service-0.vapi
-
